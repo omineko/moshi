@@ -5,8 +5,9 @@ import ReactDOM from 'react-dom/client';
 import { initializeApp } from 'firebase/app';
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
-import App from './App';
 import './index.css';
+import { RouterProvider } from 'react-router-dom';
+import router from './router';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -23,6 +24,6 @@ initializeApp(firebaseConfig);
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-    <App />
+    <RouterProvider router={router} />
   </React.StrictMode>
 );
