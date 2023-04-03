@@ -7,6 +7,7 @@ import { initializeApp } from 'firebase/app';
 // https://firebase.google.com/docs/web/setup#available-libraries
 import './index.css';
 import { RouterProvider } from 'react-router-dom';
+import { ChakraProvider } from '@chakra-ui/react';
 import router from './router';
 
 // Your web app's Firebase configuration
@@ -22,8 +23,9 @@ const firebaseConfig = {
 // Initialize Firebase
 initializeApp(firebaseConfig);
 
+// add react strict mode later
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <React.StrictMode>
+  <ChakraProvider>
     <RouterProvider router={router} />
-  </React.StrictMode>
+  </ChakraProvider>
 );

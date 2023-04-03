@@ -1,11 +1,11 @@
 import React from 'react';
 import { createBrowserRouter } from 'react-router-dom';
 
-import Login from './pages/Login';
+import Signin from './pages/Signin';
 
 export default createBrowserRouter([
   {
-    path: '/login',
-    element: <Login />,
+    path: '/signin',
+    element: <Signin />,
   },
 ]);
