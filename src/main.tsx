@@ -5,8 +5,10 @@ import ReactDOM from 'react-dom/client';
 import { initializeApp } from 'firebase/app';
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
-import App from './App';
 import './index.css';
+import { RouterProvider } from 'react-router-dom';
+import { ChakraProvider } from '@chakra-ui/react';
+import router from './router';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -21,8 +23,9 @@ const firebaseConfig = {
 // Initialize Firebase
 initializeApp(firebaseConfig);
 
+// add react strict mode later
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+  <ChakraProvider>
+    <RouterProvider router={router} />
+  </ChakraProvider>
 );
