@@ -26,7 +26,7 @@ function Signin() {
         animation="animate-bg 30s ease-in alternate infinite"
       />
       <Center w="100%" h="100%" position="absolute" top="0" left="0" zIndex={2}>
-        <Box bgColor="white" w="400px" p={12} borderRadius={4} as="form">
+        <Box bgColor="white" w="400px" p={12} rounded="md" boxShadow="xl" as="form">
           <VStack align="stretch" spacing={4}>
             <Heading textAlign="center" size="md" as="h1">
               Welcome to moshi
