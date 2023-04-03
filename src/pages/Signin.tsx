@@ -10,6 +10,7 @@ import {
   Divider,
   Heading,
 } from '@chakra-ui/react';
+import { FcGoogle } from 'react-icons/fc';
 import ocean from '../assets/bg/ocean.jpg';
 
 function Signin() {
@@ -30,7 +31,7 @@ function Signin() {
             <Heading textAlign="center" size="md" as="h1">
               Welcome to moshi
             </Heading>
-            <Button size="md" variant="outline" fontSize="xs">
+            <Button size="md" variant="outline" fontSize="xs" leftIcon={<FcGoogle />}>
               Log in using Google
             </Button>
             <Divider />
