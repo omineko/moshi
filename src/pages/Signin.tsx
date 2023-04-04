@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Center,
   VStack,
@@ -13,11 +13,49 @@ import {
 import { FcGoogle } from 'react-icons/fc';
 import BGImage from '../data/bg';
 
+type formDataType = {
+  email: {
+    value: string;
+    error: string;
+  };
+  password: {
+    value: string;
+    error: string;
+  };
+};
+
+const bg = BGImage.genRand();
+
 function Signin() {
+  const [formData, setFormData] = useState<formDataType>({
+    email: {
+      value: '',
+      error: '',
+    },
+    password: {
+      value: '',
+      error: '',
+    },
+  });
+
+  const setField = (e: React.ChangeEvent<HTMLInputElement>, field: keyof formDataType) => {
+    const { value } = e.target;
+
+    setFormData((data) => {
+      return {
+        ...data,
+        [field]: {
+          ...data[field],
+          value,
+        },
+      };
+    });
+  };
+
   return (
     <Box w="100vw" h="100vh" overflow="hidden" pos="relative">
       <Box
-        bgImage={BGImage.genRand()}
+        bgImage={bg}
         w="300%"
         h="300%"
         pos="absolute"
@@ -39,13 +77,27 @@ function Signin() {
               <FormLabel fontWeight="normal" fontSize="xs">
                 Email
               </FormLabel>
-              <Input size="md" placeholder="Enter your email address" fontSize="xs" type="email" />
+              <Input
+                size="md"
+                placeholder="Enter your email address"
+                fontSize="xs"
+                type="email"
+                value={formData.email.value}
+                onChange={(e) => setField(e, 'email')}
+              />
             </FormControl>
             <FormControl>
               <FormLabel fontWeight="normal" fontSize="xs">
                 Password
               </FormLabel>
-              <Input size="md" placeholder="Enter your password" fontSize="xs" type="password" />
+              <Input
+                size="md"
+                placeholder="Enter your password"
+                fontSize="xs"
+                type="password"
+                value={formData.password.value}
+                onChange={(e) => setField(e, 'password')}
+              />
             </FormControl>
             <Button size="md" bgColor="purple.400" fontSize="xs" type="submit">
               Sign In
