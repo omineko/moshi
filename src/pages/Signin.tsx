@@ -11,13 +11,13 @@ import {
   Heading,
 } from '@chakra-ui/react';
 import { FcGoogle } from 'react-icons/fc';
-import ocean from '../assets/bg/ocean.jpg';
+import BGImage from '../data/bg';
 
 function Signin() {
   return (
     <Box w="100vw" h="100vh" overflow="hidden" pos="relative">
       <Box
-        bgImage={ocean}
+        bgImage={BGImage.genRand()}
         w="300%"
         h="300%"
         pos="absolute"
@@ -41,7 +41,13 @@ function Signin() {
               </FormLabel>
               <Input size="md" placeholder="Enter your email address" fontSize="xs" type="email" />
             </FormControl>
-            <Button size="md" bgColor="purple.400" fontSize="xs">
+            <FormControl>
+              <FormLabel fontWeight="normal" fontSize="xs">
+                Password
+              </FormLabel>
+              <Input size="md" placeholder="Enter your password" fontSize="xs" type="password" />
+            </FormControl>
+            <Button size="md" bgColor="purple.400" fontSize="xs" type="submit">
               Sign In
             </Button>
           </VStack>
