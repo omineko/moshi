@@ -9,6 +9,7 @@ import {
   Box,
   Divider,
   Heading,
+  useToast,
 } from '@chakra-ui/react';
 import { FcGoogle } from 'react-icons/fc';
 import BGImage from '../data/bg';
@@ -27,6 +28,7 @@ type formDataType = {
 const bg = BGImage.genRand();
 
 function Signin() {
+  const toast = useToast();
   const [formData, setFormData] = useState<formDataType>({
     email: {
       value: '',
@@ -52,6 +54,20 @@ function Signin() {
     });
   };
 
+  const showPreventGoogleToast = () => {
+    if (!toast.isActive('google')) {
+      toast({
+        id: 'google',
+        title: 'Not available at the moment',
+        description: 'Moshi is currently under development',
+        position: 'top-right',
+        isClosable: true,
+        variant: 'subtle',
+        status: 'warning',
+      });
+    }
+  };
+
   return (
     <Box w="100vw" h="100vh" overflow="hidden" pos="relative">
       <Box
@@ -69,7 +85,13 @@ function Signin() {
             <Heading textAlign="center" size="md" as="h1">
               Welcome to moshi
             </Heading>
-            <Button size="md" variant="outline" fontSize="xs" leftIcon={<FcGoogle />}>
+            <Button
+              size="md"
+              variant="outline"
+              fontSize="xs"
+              leftIcon={<FcGoogle />}
+              onClick={showPreventGoogleToast}
+            >
               Log in using Google
             </Button>
             <Divider />
