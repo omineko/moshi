@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Center,
   VStack,
@@ -9,15 +9,69 @@ import {
   Box,
   Divider,
   Heading,
+  useToast,
 } from '@chakra-ui/react';
 import { FcGoogle } from 'react-icons/fc';
-import ocean from '../assets/bg/ocean.jpg';
+import BGImage from '../data/bg';
+
+type formDataType = {
+  email: {
+    value: string;
+    error: string;
+  };
+  password: {
+    value: string;
+    error: string;
+  };
+};
+
+const bg = BGImage.genRand();
 
 function Signin() {
+  const toast = useToast();
+  const [formData, setFormData] = useState<formDataType>({
+    email: {
+      value: '',
+      error: '',
+    },
+    password: {
+      value: '',
+      error: '',
+    },
+  });
+
+  const setField = (e: React.ChangeEvent<HTMLInputElement>, field: keyof formDataType) => {
+    const { value } = e.target;
+
+    setFormData((data) => {
+      return {
+        ...data,
+        [field]: {
+          ...data[field],
+          value,
+        },
+      };
+    });
+  };
+
+  const showPreventGoogleToast = () => {
+    if (!toast.isActive('google')) {
+      toast({
+        id: 'google',
+        title: 'Not available at the moment',
+        description: 'Moshi is currently under development',
+        position: 'top-right',
+        isClosable: true,
+        variant: 'subtle',
+        status: 'warning',
+      });
+    }
+  };
+
   return (
     <Box w="100vw" h="100vh" overflow="hidden" pos="relative">
       <Box
-        bgImage={ocean}
+        bgImage={bg}
         w="300%"
         h="300%"
         pos="absolute"
@@ -31,7 +85,13 @@ function Signin() {
             <Heading textAlign="center" size="md" as="h1">
               Welcome to moshi
             </Heading>
-            <Button size="md" variant="outline" fontSize="xs" leftIcon={<FcGoogle />}>
+            <Button
+              size="md"
+              variant="outline"
+              fontSize="xs"
+              leftIcon={<FcGoogle />}
+              onClick={showPreventGoogleToast}
+            >
               Log in using Google
             </Button>
             <Divider />
@@ -39,9 +99,29 @@ function Signin() {
               <FormLabel fontWeight="normal" fontSize="xs">
                 Email
               </FormLabel>
-              <Input size="md" placeholder="Enter your email address" fontSize="xs" type="email" />
+              <Input
+                size="md"
+                placeholder="Enter your email address"
+                fontSize="xs"
+                type="email"
+                value={formData.email.value}
+                onChange={(e) => setField(e, 'email')}
+              />
             </FormControl>
-            <Button size="md" bgColor="purple.400" fontSize="xs">
+            <FormControl>
+              <FormLabel fontWeight="normal" fontSize="xs">
+                Password
+              </FormLabel>
+              <Input
+                size="md"
+                placeholder="Enter your password"
+                fontSize="xs"
+                type="password"
+                value={formData.password.value}
+                onChange={(e) => setField(e, 'password')}
+              />
+            </FormControl>
+            <Button size="md" bgColor="purple.400" fontSize="xs" type="submit">
               Sign In
             </Button>
           </VStack>
